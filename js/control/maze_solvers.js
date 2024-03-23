@@ -195,5 +195,5 @@ function maze_solvers() {
 		}
 	}
 	// Remove classes after 5 seconds
-	setTimeout(removePathAndAlgoClasses, 3000);
+	setTimeout(removePathAndAlgoClasses, 4000);
 }
