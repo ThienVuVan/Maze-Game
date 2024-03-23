@@ -31,3 +31,12 @@ let mode = 1;
 let level = 1;
 
 let winner = 1;
+
+let suggestionOneClickedOne = false;
+let suggestionOneClickedTwo = false;
+let suggestionOneClickedThree = false;
+
+let suggestionTwoClickedOne = false;
+let suggestionTwoClickedTwo = false;
+let suggestionTwoClickedThree = false;
+

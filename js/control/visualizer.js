@@ -179,6 +179,7 @@ function event_mode_one(keyCode, mode) {
 		// Kiểm tra nếu start trùng với target
 		if (start_pos_one[0] === target_pos[0] && start_pos_one[1] === target_pos[1]) {
 			winner = 1;
+			localStorage.setItem('winner', '1');
 			if (mode == 1) alert("Game is over");
 			if (mode == 2) alert("Game is over! Winer is number one");
 			window.location.href = "../../html/over.html";
@@ -217,13 +218,82 @@ function event_mode_two(keyCode, mode) {
 		// Kiểm tra nếu start trùng với target
 		if (start_pos_two[0] === target_pos[0] && start_pos_two[1] === target_pos[1]) {
 			winner = 2;
+			localStorage.setItem('winner', '2');
 			alert("Game is over, winner is number two");
 			window.location.href = "../../html/over.html";
 		}
 	}
 }
 
+function event_suggestion_mode_one() {
+	document.querySelector("#suggestion_one_one").addEventListener('click', event => {
+		localStorage.setItem('person_button', '1');
+		localStorage.setItem('person_button_number', '1');
+		suggestionOneClickedOne = true;
+		maze_solvers();
+	});
+	document.querySelector("#suggestion_one_two").addEventListener('click', event => {
+		localStorage.setItem('person_button', '1');
+		localStorage.setItem('person_button_number', '2');
+		if (suggestionOneClickedOne) {
+			suggestionOneClickedTwo = true;
+			maze_solvers();
+		} else {
+			alert("you must choose suggestion one first");
+		}
+
+	});
+	document.querySelector("#suggestion_one_three").addEventListener('click', event => {
+		localStorage.setItem('person_button', '1');
+		localStorage.setItem('person_button_number', '3');
+		if (suggestionOneClickedOne && suggestionOneClickedTwo) {
+			suggestionOneClickedThree = true;
+			maze_solvers();
+		} else {
+			alert("you must choose suggestion one and two first");
+		}
+	});
+}
+
+function event_suggestion_mode_two() {
+	document.querySelector("#suggestion_two_one").addEventListener('click', event => {
+		localStorage.setItem('person_button', '2');
+		localStorage.setItem('person_button_number', '1');
+		suggestionTwoClickedOne = true;
+		maze_solvers();
+	});
+	document.querySelector("#suggestion_two_two").addEventListener('click', event => {
+		localStorage.setItem('person_button', '2');
+		localStorage.setItem('person_button_number', '2');
+		if (suggestionTwoClickedOne) {
+			suggestionTwoClickedTwo = true;
+			maze_solvers();
+		} else {
+			alert("you must choose suggestion one first");
+		}
+	});
+	document.querySelector("#suggestion_two_three").addEventListener('click', event => {
+		localStorage.setItem('person_button', '2');
+		localStorage.setItem('person_button_number', '3');
+		if (suggestionTwoClickedOne && suggestionTwoClickedTwo) {
+			suggestionTwoClickedThree = true;
+			maze_solvers();
+		} else {
+			alert("you must choose suggestion one and two first");
+		}
+	});
+}
+
 function visualizer_event_listeners() {
+
+	// listen suggestions
+	if (mode == 1) {
+		event_suggestion_mode_one();
+	}
+	if (mode == 2) {
+		event_suggestion_mode_one();
+		event_suggestion_mode_two();
+	}
 
 	// Di chuyển start_pos khi bấm các phím mũi tên
 	document.addEventListener('keydown', function (event) {

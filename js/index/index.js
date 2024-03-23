@@ -37,6 +37,23 @@ function toggleLevel() {
 	}
 }
 
+function toggleSusgestion() {
+	if (mode === 1) {
+		document.getElementById('suggestion_one').style.display = 'block';
+		document.getElementById('suggestion_two').style.display = 'none';
+	}
+	if (mode === 2) {
+		document.getElementById('suggestion_one').style.display = 'block';
+		document.getElementById('suggestion_two').style.display = 'block';
+	}
+}
+
+function checkSuggestionIsChecked() {
+	if (suggestionOneClickedOne == false) {
+		document.getElementById('suggestion_one').classList.add("checked");
+	}
+}
+
 window.onload = function () {
 	initial_max_grid_size = parseInt(localStorage.getItem('initial_max_grid_size'));
 	mode = parseInt(localStorage.getItem('mode'));
@@ -44,6 +61,7 @@ window.onload = function () {
 
 	toggleMode();
 	toggleLevel();
+	toggleSusgestion();
 
 	init_css_properties_before();
 	generate_grid();
