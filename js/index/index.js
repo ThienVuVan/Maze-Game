@@ -67,10 +67,6 @@ window.onload = function () {
 	generate_grid();
 	init_css_properties_after();
 
-	// window.addEventListener('resize', () => {
-	// 	clear();
-	// });
-
 	visualizer_event_listeners();
 	maze_generators();
 

@@ -17,8 +17,6 @@ body {
 
 #button_menu,
 #button_exit {
-    background-image: url("button_image.png");
-    /* Đặt hình ảnh cho nút */
     background-color: yellow;
     width: 150px;
     height: 50px;

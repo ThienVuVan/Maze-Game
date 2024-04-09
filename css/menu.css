@@ -16,7 +16,6 @@ body {
 }
 
 .button {
-    background-image: url("button_image.png");
     background-color: yellow;
     width: 150px;
     height: 50px;
