@@ -154,13 +154,17 @@ function tog_end(text_view, text_icon) {
 		icon: text_icon,
 		buttons: {
 			menu: {
-				text: "Back to menu",
+				text: "Back To Menu",
 				value: "menu",
 			},
-			exit: {
-				text: "Exit game",
-				value: "exit",
+			again: {
+				text: "Play Again",
+				value: "again",
 			},
+			again_harder: {
+				text: "Play Harder",
+				value: "again_harder",
+			}
 		},
 	})
 		.then((value) => {
@@ -168,9 +172,25 @@ function tog_end(text_view, text_icon) {
 				case "menu":
 					window.location.href = "menu.html";
 					break;
-				case "exit":
-					swal("Oops!", "Tắt broswer đi má!", "warning");
+				case "again":
+					window.location.href = "index.html";
 					break;
+				case "again_harder":
+					initial_max_grid_size = parseInt(localStorage.getItem('initial_max_grid_size'));
+					level = parseInt(localStorage.getItem('level'));
+					if (level === 1) {
+						localStorage.setItem('initial_max_grid_size', '33');
+						localStorage.setItem('level', '2');
+						window.location.href = "index.html";
+					}
+					if (level === 2) {
+						localStorage.setItem('initial_max_grid_size', '51');
+						localStorage.setItem('level', '3');
+						window.location.href = "index.html";
+					}
+					if (level === 3) {
+						swal("Oops!", "Má chơi mức khó nhất rồi! Có chơi lại thì chơi, không thì mình chia tay!", "warning")
+					}
 				default:
 					break;
 			}
@@ -208,6 +228,7 @@ function event_mode_one(keyCode, mode) {
 
 		// Kiểm tra nếu start trùng với target
 		if (start_pos_one[0] === target_pos[0] && start_pos_one[1] === target_pos[1]) {
+			isWin = true;
 			winner = 1;
 			localStorage.setItem('winner', '1');
 			if (mode == 1) tog_end("You win", "success")
@@ -246,6 +267,7 @@ function event_mode_two(keyCode, mode) {
 
 		// Kiểm tra nếu start trùng với target
 		if (start_pos_two[0] === target_pos[0] && start_pos_two[1] === target_pos[1]) {
+			isWin = true;
 			winner = 2;
 			localStorage.setItem('winner', '2');
 			tog_end("Winner is number two", "success")
@@ -256,7 +278,7 @@ function event_mode_two(keyCode, mode) {
 function event_suggestion_mode_one() {
 	document.querySelector("#suggestion_one_one").addEventListener('click', event => {
 		if (suggestionOneClickedOne == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
 		}
 		localStorage.setItem('person_button', '1');
@@ -270,7 +292,7 @@ function event_suggestion_mode_one() {
 	});
 	document.querySelector("#suggestion_one_two").addEventListener('click', event => {
 		if (suggestionOneClickedTwo == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
 		}
 		localStorage.setItem('person_button', '1');
@@ -282,13 +304,13 @@ function event_suggestion_mode_one() {
 			document.querySelector("#suggestion_one_two").classList.add("choosed");
 			maze_solvers();
 		} else {
-			swal("Oops!", "You must choose suggestion one first", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Phải chọn cái gợi ý đầu tiên trước :))", "warning");
 		}
 
 	});
 	document.querySelector("#suggestion_one_three").addEventListener('click', event => {
 		if (suggestionOneClickedThree == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
 		}
 		localStorage.setItem('person_button', '1');
@@ -300,7 +322,7 @@ function event_suggestion_mode_one() {
 			document.querySelector("#suggestion_one_three").classList.add("choosed");
 			maze_solvers();
 		} else {
-			swal("Oops!", "You must choose suggestion two first", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Phải chọn cái gợi ý thứ hai trước :))", "warning");
 		}
 	});
 }
@@ -308,7 +330,7 @@ function event_suggestion_mode_one() {
 function event_suggestion_mode_two() {
 	document.querySelector("#suggestion_two_one").addEventListener('click', event => {
 		if (suggestionTwoClickedOne == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return;
 		}
 		localStorage.setItem('person_button', '2');
@@ -321,7 +343,7 @@ function event_suggestion_mode_two() {
 	});
 	document.querySelector("#suggestion_two_two").addEventListener('click', event => {
 		if (suggestionTwoClickedTwo == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return;
 		}
 		localStorage.setItem('person_button', '2');
@@ -333,12 +355,12 @@ function event_suggestion_mode_two() {
 			document.querySelector("#suggestion_two_two").classList.add("choosed");
 			maze_solvers();
 		} else {
-			swal("Oops!", "You must choose suggestion one first", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Phải chọn cái gợi ý đầu tiên trước :))", "warning");
 		}
 	});
 	document.querySelector("#suggestion_two_three").addEventListener('click', event => {
 		if (suggestionTwoClickedThree == true) {
-			swal("Oops!", "You have already used this suggestion", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Cái này dùng rồi :))", "warning");
 			return;
 		}
 		localStorage.setItem('person_button', '2');
@@ -350,7 +372,7 @@ function event_suggestion_mode_two() {
 			document.querySelector("#suggestion_two_three").classList.add("choosed");
 			maze_solvers();
 		} else {
-			swal("Oops!", "You must choose suggestion two first", "warning");
+			swal("Thắng Bại Tại Kỹ Năng", "Má ơi! Phải chọn cái gợi ý thứ hai trước :))", "warning");
 		}
 	});
 }

@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    /* Remove default body margin */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #container {
@@ -10,99 +10,65 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-
 }
 
 .button {
-    background-color: yellow;
+    background-color: #ffc107;
     width: 150px;
     height: 50px;
-    background-size: cover;
-    background-position: center;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 25px;
     font-size: 20px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
+    color: black;
+    border: 2px solid white;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
-
-.choosed {
-    background-color: red;
-}
-
-.choosed_mode {
-    background-color: red;
-}
-
-#button_normal {
-    margin-right: 50px;
-}
-
-#button_medium {
-    margin-right: 50px;
-}
-
-#button_hard {
-    margin-right: 50px;
-}
-
-#one_person {
-    margin-right: 50px;
-}
-
-#two_person {
-    margin-left: 50px;
-}
-
 
 .button:hover {
-    opacity: 0.6;
+    background-color: #ffc107;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
+    color: white;
 }
 
-#title {
-    margin-bottom: 20px;
-
-    h2 {
-        color: aliceblue;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 150px;
-        margin: 0;
-    }
+.choosed,
+.choosed_mode {
+    background-color: rgb(245, 24, 24);
+    color: black;
 }
 
-#choose_map {
-    margin-bottom: 20px;
-
-    h2 {
-        color: aliceblue;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 60px;
-        margin: 0;
-    }
+#button_normal,
+#button_medium,
+#button_hard,
+#one_person,
+#two_person,
+#button_back,
+#button_play {
+    margin: 20px;
 }
 
-#choose_mode {
-    margin-top: 20px;
-    margin-bottom: 20px;
+#title h2 {
+    color: white;
+    font-size: 150px;
+    margin: 0;
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5),
+        -4px -4px 8px rgba(0, 0, 0, 0.5);
+    /* Viền bên phải và dưới */
+}
 
-    h2 {
-        color: aliceblue;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 60px;
-        margin: 0;
-    }
+
+#choose_map h2,
+#choose_mode h2 {
+    color: white;
+    font-size: 60px;
+    margin: 0;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5),
+        -4px -4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #control {
     margin-top: 50px;
-}
-
-#button_back {
-    margin-right: 450px;
-}
-
-#button_play {
-    margin-left: 450px;
 }

@@ -69,8 +69,9 @@ function countdownTimer(duration) {
 
 		if (--timer < 0) {
 			clearInterval(interval);
-			// Swal thông báo khi hết thời gian
-			tog_end("Time's up! You Lose", "warning")
+			if (isWin == false) {
+				tog_end("Time's up! You Lose", "warning")
+			}
 		}
 	}, 1000);
 }
@@ -105,17 +106,17 @@ window.onload = function () {
 	}
 
 	if (mode === 1) {
-		swal("Notices! Thắng Bại Tại Kỹ Năng", "Dùng phím A-S-D-W để di chuyển đến đích, bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
-			if (level === 1) countdownTimer(0.5);
-			if (level === 2) countdownTimer(1);
-			if (level === 3) countdownTimer(1.5);
+		swal("Thắng Bại Tại Kỹ Năng", "Dùng phím A-S-D-W để di chuyển đến đích, bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
+			if (level === 1) countdownTimer(0.25);
+			if (level === 2) countdownTimer(0.5);
+			if (level === 3) countdownTimer(1);
 		});
 	}
 	if (mode === 2) {
-		swal("Notices! Thắng Bại Tại Kỹ Năng", "Người chơi thứ nhất có màu xanh, người chơi thứ hai có màu đỏ, ban đầu hai bạn đang đứng cùng vị trí xuất phát nên có màu vàng, hãy di chuyển để xem màu của bạn, mỗi bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
-			if (level === 1) countdownTimer(0.5);
-			if (level === 2) countdownTimer(1);
-			if (level === 3) countdownTimer(1.5);
+		swal("Thắng Bại Tại Kỹ Năng", "Người chơi thứ nhất có màu xanh, người chơi thứ hai có màu đỏ, ban đầu hai bạn đang đứng cùng vị trí xuất phát nên có màu vàng, hãy di chuyển để xem màu của bạn, mỗi bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
+			if (level === 1) countdownTimer(0.25);
+			if (level === 2) countdownTimer(0.5);
+			if (level === 3) countdownTimer(1);
 		});
 	}
 
