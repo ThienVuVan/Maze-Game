@@ -54,6 +54,28 @@ function checkSuggestionIsChecked() {
 	}
 }
 
+function countdownTimer(duration) {
+	let timer = duration * 60;
+	let minutes, seconds;
+
+	let interval = setInterval(function () {
+		minutes = parseInt(timer / 60, 10);
+		seconds = parseInt(timer % 60, 10);
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		document.getElementById('time_display').textContent = minutes + ":" + seconds;
+
+		if (--timer < 0) {
+			clearInterval(interval);
+			// Swal thông báo khi hết thời gian
+			tog_end("Time's up! You Lose", "warning")
+		}
+	}, 1000);
+}
+
+
 window.onload = function () {
 	initial_max_grid_size = parseInt(localStorage.getItem('initial_max_grid_size'));
 	mode = parseInt(localStorage.getItem('mode'));
@@ -69,6 +91,33 @@ window.onload = function () {
 
 	visualizer_event_listeners();
 	maze_generators();
+
+	if (mode === 2) {
+		if (start_pos_one[0] == start_pos_two[0] && start_pos_one[1] == start_pos_two[1]) {
+			let currentSameCell = place_to_cell(start_pos_two[0], start_pos_two[1]);
+			currentSameCell.classList.add("start-same");
+		} else {
+			let currentSameCell = document.querySelector(".start-same");
+			if (currentSameCell) {
+				currentSameCell.classList.remove("start-same");
+			}
+		}
+	}
+
+	if (mode === 1) {
+		swal("Notices! Thắng Bại Tại Kỹ Năng", "Dùng phím A-S-D-W để di chuyển đến đích, bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
+			if (level === 1) countdownTimer(0.5);
+			if (level === 2) countdownTimer(1);
+			if (level === 3) countdownTimer(1.5);
+		});
+	}
+	if (mode === 2) {
+		swal("Notices! Thắng Bại Tại Kỹ Năng", "Người chơi thứ nhất có màu xanh, người chơi thứ hai có màu đỏ, ban đầu hai bạn đang đứng cùng vị trí xuất phát nên có màu vàng, hãy di chuyển để xem màu của bạn, mỗi bạn có 3 lượt gợi ý, chú ý thời gian nhé, good luck!", "warning").then(() => {
+			if (level === 1) countdownTimer(0.5);
+			if (level === 2) countdownTimer(1);
+			if (level === 3) countdownTimer(1.5);
+		});
+	}
 
 	document.querySelector("#hider").style.visibility = "hidden";
 }

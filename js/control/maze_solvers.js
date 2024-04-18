@@ -41,7 +41,7 @@ function maze_solvers_interval(person_button, person_button_number) {
 				} else {
 					place_to_cell(path_list[path_list_index][0], path_list[path_list_index][1]).classList.remove("cell_algo");
 				}
-
+				setTimeout(removePathAndAlgoClasses, 2000);
 				path_list_index++;
 			}
 			if (person_button_number == 2) {
@@ -51,17 +51,17 @@ function maze_solvers_interval(person_button, person_button_number) {
 				} else {
 					place_to_cell(path_list[path_list_index][0], path_list[path_list_index][1]).classList.remove("cell_algo");
 				}
-
+				setTimeout(removePathAndAlgoClasses, 2000);
 				path_list_index++;
 			}
 			if (person_button_number == 3) {
-				// Chỉ hiển thị 1/2 ô đầu tiên
-				if (path_list_index < Math.ceil(path_list.length / 1)) {
+				// Chỉ hiển thị hết
+				if (path_list_index < Math.ceil(path_list.length / 2)) {
 					place_to_cell(path_list[path_list_index][0], path_list[path_list_index][1]).classList.add("cell_path");
 				} else {
 					place_to_cell(path_list[path_list_index][0], path_list[path_list_index][1]).classList.remove("cell_algo");
 				}
-
+				setTimeout(removePathAndAlgoClasses, 2000);
 				path_list_index++;
 			}
 		}
@@ -152,7 +152,6 @@ function a_star(person_button, person_button_number) {
 		path_list.pop();
 		path_list.reverse();
 	}
-
 	maze_solvers_interval(person_button, person_button_number);
 }
 
@@ -172,6 +171,7 @@ function maze_solvers() {
 	grid_clean = false;
 	let person_button = parseInt(localStorage.getItem('person_button'));
 	let person_button_number = parseInt(localStorage.getItem('person_button_number'));
+	let level = parseInt(localStorage.getItem('level'));
 	// for person one
 	if (person_button == 1) {
 		if ((Math.abs(start_pos_one[0] - target_pos[0]) == 0 && Math.abs(start_pos_one[1] - target_pos[1]) == 1) ||
@@ -194,6 +194,4 @@ function maze_solvers() {
 			a_star(person_button, person_button_number);
 		}
 	}
-	// Remove classes after 5 seconds
-	setTimeout(removePathAndAlgoClasses, 4000);
 }

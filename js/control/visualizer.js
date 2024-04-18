@@ -72,12 +72,12 @@ function generate_grid() {
 	}
 	if (mode == 2) {
 		start_pos_one = [1, 1]; // Cập nhật vị trí bắt đầu
-		start_pos_two = [grid_size_x - 2, 1];
+		start_pos_two = [1, 1];
 		target_pos = [grid_size_x - 2, grid_size_y - 2]; // Cập nhật vị trí kết thúc
 
 		// Xác định lại class 'start' và 'target' cho ô bắt đầu và kết thúc
 		place_to_cell(1, 1).classList.add("start-one");
-		place_to_cell(grid_size_x - 2, 1).classList.add("start-two");
+		place_to_cell(1, 1).classList.add("start-two");
 		place_to_cell(grid_size_x - 2, grid_size_y - 2).classList.add("target");
 	}
 }
@@ -147,6 +147,36 @@ function get_node(x, y) {
 	return -2;
 }
 
+function tog_end(text_view, text_icon) {
+	swal({
+		title: "Game end!",
+		text: text_view,
+		icon: text_icon,
+		buttons: {
+			menu: {
+				text: "Back to menu",
+				value: "menu",
+			},
+			exit: {
+				text: "Exit game",
+				value: "exit",
+			},
+		},
+	})
+		.then((value) => {
+			switch (value) {
+				case "menu":
+					window.location.href = "menu.html";
+					break;
+				case "exit":
+					swal("Oops!", "Tắt broswer đi má!", "warning");
+					break;
+				default:
+					break;
+			}
+		});
+}
+
 
 function event_mode_one(keyCode, mode) {
 	let newXone = start_pos_one[0];
@@ -180,9 +210,8 @@ function event_mode_one(keyCode, mode) {
 		if (start_pos_one[0] === target_pos[0] && start_pos_one[1] === target_pos[1]) {
 			winner = 1;
 			localStorage.setItem('winner', '1');
-			if (mode == 1) alert("Game is over");
-			if (mode == 2) alert("Game is over! Winer is number one");
-			window.location.href = "../../html/over.html";
+			if (mode == 1) tog_end("You win", "success")
+			if (mode == 2) tog_end("Winner is number one", "success");
 		}
 	}
 }
@@ -219,67 +248,109 @@ function event_mode_two(keyCode, mode) {
 		if (start_pos_two[0] === target_pos[0] && start_pos_two[1] === target_pos[1]) {
 			winner = 2;
 			localStorage.setItem('winner', '2');
-			alert("Game is over, winner is number two");
-			window.location.href = "../../html/over.html";
+			tog_end("Winner is number two", "success")
 		}
 	}
 }
 
 function event_suggestion_mode_one() {
 	document.querySelector("#suggestion_one_one").addEventListener('click', event => {
+		if (suggestionOneClickedOne == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
+		}
 		localStorage.setItem('person_button', '1');
 		localStorage.setItem('person_button_number', '1');
 		suggestionOneClickedOne = true;
+		// change colour
+		document.querySelector("#suggestion_one_one").classList.remove("not_chosse");
+		document.querySelector("#suggestion_one_one").classList.add("choosed");
+
 		maze_solvers();
 	});
 	document.querySelector("#suggestion_one_two").addEventListener('click', event => {
+		if (suggestionOneClickedTwo == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
+		}
 		localStorage.setItem('person_button', '1');
 		localStorage.setItem('person_button_number', '2');
 		if (suggestionOneClickedOne) {
 			suggestionOneClickedTwo = true;
+			// change colour
+			document.querySelector("#suggestion_one_two").classList.remove("not_chosse");
+			document.querySelector("#suggestion_one_two").classList.add("choosed");
 			maze_solvers();
 		} else {
-			alert("you must choose suggestion one first");
+			swal("Oops!", "You must choose suggestion one first", "warning");
 		}
 
 	});
 	document.querySelector("#suggestion_one_three").addEventListener('click', event => {
+		if (suggestionOneClickedThree == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return; // Dừng hàm ngay tại đây nếu gợi ý đã được sử dụng
+		}
 		localStorage.setItem('person_button', '1');
 		localStorage.setItem('person_button_number', '3');
 		if (suggestionOneClickedOne && suggestionOneClickedTwo) {
 			suggestionOneClickedThree = true;
+			// change colour
+			document.querySelector("#suggestion_one_three").classList.remove("not_chosse");
+			document.querySelector("#suggestion_one_three").classList.add("choosed");
 			maze_solvers();
 		} else {
-			alert("you must choose suggestion one and two first");
+			swal("Oops!", "You must choose suggestion two first", "warning");
 		}
 	});
 }
 
 function event_suggestion_mode_two() {
 	document.querySelector("#suggestion_two_one").addEventListener('click', event => {
+		if (suggestionTwoClickedOne == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return;
+		}
 		localStorage.setItem('person_button', '2');
 		localStorage.setItem('person_button_number', '1');
 		suggestionTwoClickedOne = true;
+		// change colour
+		document.querySelector("#suggestion_two_one").classList.remove("not_chosse_two");
+		document.querySelector("#suggestion_two_one").classList.add("choosed");
 		maze_solvers();
 	});
 	document.querySelector("#suggestion_two_two").addEventListener('click', event => {
+		if (suggestionTwoClickedTwo == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return;
+		}
 		localStorage.setItem('person_button', '2');
 		localStorage.setItem('person_button_number', '2');
 		if (suggestionTwoClickedOne) {
 			suggestionTwoClickedTwo = true;
+			// change colour
+			document.querySelector("#suggestion_two_two").classList.remove("not_chosse_two");
+			document.querySelector("#suggestion_two_two").classList.add("choosed");
 			maze_solvers();
 		} else {
-			alert("you must choose suggestion one first");
+			swal("Oops!", "You must choose suggestion one first", "warning");
 		}
 	});
 	document.querySelector("#suggestion_two_three").addEventListener('click', event => {
+		if (suggestionTwoClickedThree == true) {
+			swal("Oops!", "You have already used this suggestion", "warning");
+			return;
+		}
 		localStorage.setItem('person_button', '2');
 		localStorage.setItem('person_button_number', '3');
 		if (suggestionTwoClickedOne && suggestionTwoClickedTwo) {
 			suggestionTwoClickedThree = true;
+			// change colour
+			document.querySelector("#suggestion_two_three").classList.remove("not_chosse_two");
+			document.querySelector("#suggestion_two_three").classList.add("choosed");
 			maze_solvers();
 		} else {
-			alert("you must choose suggestion one and two first");
+			swal("Oops!", "You must choose suggestion two first", "warning");
 		}
 	});
 }

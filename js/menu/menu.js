@@ -37,7 +37,7 @@ window.onload = function () {
 
     // chosse play/back
     document.querySelector("#button_back").addEventListener('click', event => {
-        window.location.href = "../../html/welcome.html";
+        swal("Oops!", "Thì Tắt Broswer Đi Má!", "warning");
     });
 
     document.querySelector("#button_play").addEventListener('click', event => {

@@ -18,6 +18,8 @@
 	<script type="text/javascript" src="../js/control/maze_solvers.js"></script>
 	<script type="text/javascript" src="../js/control/visualizer.js"></script>
 	<script type="text/javascript" src="../js/index/index.js"></script>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -40,15 +42,19 @@
 		</div>
 
 		<div id="suggestion_one">
-			<button id="suggestion_one_one">1</button>
-			<button id="suggestion_one_two">2</button>
-			<button id="suggestion_one_three">3</button>
+			<button id="suggestion_one_one" class="not_chosse">1</button>
+			<button id="suggestion_one_two" class="not_chosse">2</button>
+			<button id="suggestion_one_three" class="not_chosse">3</button>
 		</div>
 
 		<div id="suggestion_two">
-			<button id="suggestion_two_one">1</button>
-			<button id="suggestion_two_two">2</button>
-			<button id="suggestion_two_three">3</button>
+			<button id="suggestion_two_one" class="not_chosse_two">1</button>
+			<button id="suggestion_two_two" class="not_chosse_two">2</button>
+			<button id="suggestion_two_three" class="not_chosse_two">3</button>
+		</div>
+
+		<div id="time">
+			Time Left: <span id="time_display"></span>
 		</div>
 	</div>
 

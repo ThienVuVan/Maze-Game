@@ -40,3 +40,5 @@ let suggestionTwoClickedOne = false;
 let suggestionTwoClickedTwo = false;
 let suggestionTwoClickedThree = false;
 
+let totalTime = 300; // Total time in seconds
+let currentTime = totalTime; // Current time in seconds
