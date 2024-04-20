@@ -55,7 +55,7 @@ function maze_solvers_interval(person_button, person_button_number) {
 				path_list_index++;
 			}
 			if (person_button_number == 3) {
-				// Chỉ hiển thị hết
+				// Chỉ hiển thị 1/2 ô đầu tiên
 				if (path_list_index < Math.ceil(path_list.length / 2)) {
 					place_to_cell(path_list[path_list_index][0], path_list[path_list_index][1]).classList.add("cell_path");
 				} else {
