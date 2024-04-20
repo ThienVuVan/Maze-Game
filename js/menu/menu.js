@@ -41,7 +41,7 @@ window.onload = function () {
     });
 
     document.querySelector("#button_play").addEventListener('click', event => {
-        window.location.href = "../../html/index.html";
+        window.location.href = "../../html/play.html";
     });
 }
 

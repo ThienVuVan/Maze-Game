@@ -170,10 +170,10 @@ function tog_end(text_view, text_icon) {
 		.then((value) => {
 			switch (value) {
 				case "menu":
-					window.location.href = "menu.html";
+					window.location.href = "index.html";
 					break;
 				case "again":
-					window.location.href = "index.html";
+					window.location.href = "play.html";
 					break;
 				case "again_harder":
 					initial_max_grid_size = parseInt(localStorage.getItem('initial_max_grid_size'));
@@ -181,12 +181,12 @@ function tog_end(text_view, text_icon) {
 					if (level === 1) {
 						localStorage.setItem('initial_max_grid_size', '33');
 						localStorage.setItem('level', '2');
-						window.location.href = "index.html";
+						window.location.href = "play.html";
 					}
 					if (level === 2) {
 						localStorage.setItem('initial_max_grid_size', '51');
 						localStorage.setItem('level', '3');
-						window.location.href = "index.html";
+						window.location.href = "play.html";
 					}
 					if (level === 3) {
 						swal("Oops!", "Má chơi mức khó nhất rồi! Có chơi lại thì chơi, không thì mình chia tay!", "warning")
